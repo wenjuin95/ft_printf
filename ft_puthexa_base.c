@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puthexa_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:53 by welow             #+#    #+#             */
-/*   Updated: 2023/10/26 17:58:50 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/27 00:47:47 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,25 @@
 // }
 
 
-int	ft_puthexa_base(long n, int base)
+int	ft_puthexa_base(long n, int base, int is_upper)
 {
 	int		count;
 	char	*symbol;
 
-	symbol = "0123456789ABCDEF";
+	if (is_upper)
+		symbol = "0123456789ABCDEF";
+	else
+		symbol = "0123456789abcdef";
 	if (n < 0)
 	{
 		ft_putchar('-');
-		return (ft_puthexa_base(-n, base) + 1);
+		return (ft_puthexa_base(-n, base, is_upper) + 1);
 	}
 	else if (n < base)
 		return (ft_putchar(symbol[n]));
 	else
 	{
-		count = ft_puthexa_base(n / base, base);
-		return (count + ft_puthexa_base(n % base, base));
+		count = ft_puthexa_base(n / base, base, is_upper);
+		return (count + ft_puthexa_base(n % base, base, is_upper));
 	}
 }

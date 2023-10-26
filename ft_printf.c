@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:15:50 by welow             #+#    #+#             */
-/*   Updated: 2023/10/26 21:44:43 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/27 00:46:59 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,9 @@ int	printf_format(va_list list_argument, const char str)
 	else if (str == 'd' || str == 'i')
 		count += ft_putnbr_base(va_arg(list_argument, int), 10);
 	else if (str == 'x')
-		count += ft_putnbr_base(va_arg(list_argument, unsigned int), 16);
+		count += ft_puthexa_base(va_arg(list_argument, unsigned int), 16, 0);
 	else if (str == 'X')
-		count += ft_puthexa_base(va_arg(list_argument, unsigned int), 16);
+		count += ft_puthexa_base(va_arg(list_argument, unsigned int), 16, 1);
 	else if (str == 'u')
 		count += ft_putnbr_base(va_arg(list_argument, unsigned int), 10);
 	else if (str == 'p')
