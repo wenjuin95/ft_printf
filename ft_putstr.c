@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 21:09:40 by welow             #+#    #+#             */
-/*   Updated: 2023/10/24 21:09:57 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/26 14:09:35 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,18 @@ int	ft_putstr(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i])
+	if (str == NULL)
 	{
-		i++;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	write(1, str, i);
-	return (i);
+	else
+	{
+		while (str[i])
+		{
+			i++;
+		}
+		write(1, str, i);
+		return (i);
+	}
 }

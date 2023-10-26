@@ -6,21 +6,21 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:15:50 by welow             #+#    #+#             */
-/*   Updated: 2023/10/24 21:52:21 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/26 21:44:43 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 // #include <unistd.h>
 // #include <stdarg.h>
+// #include <stdlib.h>
 
-// int	ft_putchar(char c)
+// void	ft_putchar(char c)
 // {
 // 	write(1, &c, 1);
-// 	return (1);
 // }
 
-// int	ft_putstr(char *str)
+// void	ft_putstr(char *str)
 // {
 // 	int	i;
 
@@ -30,10 +30,9 @@
 // 		i++;
 // 	}
 // 	write(1, str, i);
-// 	return (i);
 // }
 
-// int	ft_putnbr(int n)
+// void	ft_putnbr(int n)
 // {
 // 	long	nb;
 
@@ -50,10 +49,9 @@
 // 	}
 // 	else
 // 		ft_putchar(nb + '0');
-// 	return (nb);
 // }
 
-// int	ft_putunsigned(unsigned int n)
+// void	ft_putunsigned(unsigned int n)
 // {
 
 // 	if (n >= 10)
@@ -63,59 +61,116 @@
 // 	}
 // 	else
 // 		ft_putchar(n + '0');
-// 	return (n);
 // }
 
-int	printf_format(char str, va_list ap)
+// void	ft_pointer(size_t pointer)
+// {
+// 	char	*str;
+// 	int		i;
+// 	char	*base;
+
+// 	str = malloc(18 * sizeof(char));
+// 	if (str == NULL)
+// 		return ;
+// 	base = "0123456789abcdef";
+// 	i = 0;
+// 	write(1, "0x", 2);
+// 	if (pointer == 0)
+// 	{
+// 		ft_putchar('0');
+// 		return ;
+// 	}
+// 	while (pointer != 0)
+// 	{
+// 		str[i++] = base[pointer % 16];
+// 		pointer /= 16;
+// 		i++;
+// 	}
+// 	while (i--)
+// 		ft_putchar(str[i]);
+// }
+
+// void	ft_puthexa(size_t pointer, char format)
+// {
+// 	char	*str;
+// 	int		i;
+// 	char	*base;
+
+// 	str = malloc(16 * sizeof(char));
+// 	if (str == NULL)
+// 		return ;
+// 	if (format == 'X')
+// 		base = "0123456789ABCDEF";
+// 	else
+// 		base = "0123456789abcdef";
+// 	i = 0;
+// 	if (pointer == 0)
+// 	{
+// 		ft_putchar('0');
+// 		return ;
+// 	}
+// 	while (pointer != 0)
+// 	{
+// 		str[i++] = base[pointer % 16];
+// 		pointer /= 16;
+// 		i++;
+// 	}
+// 	while (i--)
+// 		ft_putchar(str[i]);
+// }
+
+int	printf_format(va_list list_argument, const char str)
 {
+	int		count;
+	void	*ptr;
 
-	if (str == 'c')
-		return (ft_putchar(va_arg(ap, int)));
-	else if (str == 's')
-		return (ft_putstr(va_arg(ap, char *)));
-	// else if (str = 'p')
-	// 	count += /*code*/
-	else if (str == 'd' || str == 'i')
-		return (ft_putnbr(va_arg(ap, int)));
-	else if (str == 'u')
-		return (ft_putunsigned(va_arg(ap, unsigned int)));
-	// else if (str == 'x' || str == 'X')
-	// 	count += /*code*/
-	else if (str == '%')
-		return (ft_putchar('%'));
-	else
-		return (0);
-}
-
-int	ft_printf(const char *str, ...)
-{
-	va_list		ap;
-	int			count;
-
-	va_start(ap, str);
 	count = 0;
-	while (*str)
+	if (str == 'c')
+		count += ft_putchar(va_arg(list_argument, int));
+	else if (str == 's')
+		count += ft_putstr(va_arg(list_argument, char *));
+	else if (str == 'd' || str == 'i')
+		count += ft_putnbr_base(va_arg(list_argument, int), 10);
+	else if (str == 'x')
+		count += ft_putnbr_base(va_arg(list_argument, unsigned int), 16);
+	else if (str == 'X')
+		count += ft_puthexa_base(va_arg(list_argument, unsigned int), 16);
+	else if (str == 'u')
+		count += ft_putnbr_base(va_arg(list_argument, unsigned int), 10);
+	else if (str == 'p')
 	{
-		if (*str == '%')
-		{
-			count += printf_format(*(str + 1), ap);
-			str++;
-		}
-		else
-			count += ft_putchar(*(str));
-		str++;
+		ptr = va_arg(list_argument, void *);
+		count += ft_putstr("0x");
+		count += ft_putaddress((unsigned long long)ptr, 16);
 	}
-	va_end(ap);
+	else if (str == '%')
+		count += ft_putchar('%');
 	return (count);
 }
 
-#include <stdio.h>
-
-int main()
+int	ft_printf(const char *format, ...)
 {
-	// ft_printf("%s\n", "sda");
-	// ft_printf("%c\n", 's');
-	// ft_printf("%i\n", 999999999);
-	// ft_printf("%%\n");
-	ft_printf("%u\n", 99999999);
+	va_list		list_argument;
+	int			i;
+	int			char_print;
+
+	i = 0;
+	char_print = 0;
+	if (format == NULL)
+		return (-1);
+	va_start(list_argument, format);
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			char_print += printf_format(list_argument, format[i + 1]);
+			i++;
+		}
+		else
+			char_print += ft_putchar(format[i]);
+		i++;
+	}
+	va_end(list_argument);
+	return (char_print);
 }
+

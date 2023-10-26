@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 21:14:16 by welow             #+#    #+#             */
-/*   Updated: 2023/10/24 21:17:02 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/26 16:57:05 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr(int n)
+int	ft_putnbr_base(long n, int base)
 {
-	long	nb;
+	int		count;
+	char	*symbol;
 
-	nb = n;
-	if (nb < 0)
+	symbol = "0123456789abcdef";
+	if (n < 0)
 	{
 		ft_putchar('-');
-		nb *= -1;
+		return (ft_putnbr_base(-n, base) + 1);
 	}
-	if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putchar(nb % 10 + '0');
-	}
+	else if (n < base)
+		return (ft_putchar(symbol[n]));
 	else
-		ft_putchar(nb + '0');
-	return (nb);
+	{
+		count = ft_putnbr_base(n / base, base);
+		return (count + ft_putnbr_base(n % base, base));
+	}
 }
