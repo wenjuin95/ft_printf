@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:15:50 by welow             #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2023/10/27 14:27:13 by welow            ###   ########.fr       */
-=======
-/*   Updated: 2023/10/27 00:46:59 by welow            ###   ########.fr       */
->>>>>>> bd2747d10ee513f69bc9a8d96520769c53b94c18
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +27,9 @@ int	printf_format(va_list list_argument, const char str)
 	else if (str == 'u')
 		count += ft_putnbr_unsigned(va_arg(list_argument, unsigned int));
 	else if (str == 'x')
-<<<<<<< HEAD
 		count += ft_puthexa_lower(va_arg(list_argument, unsigned int));
 	else if (str == 'X')
 		count += ft_puthexa_upper(va_arg(list_argument, unsigned int));
-=======
-		count += ft_puthexa_base(va_arg(list_argument, unsigned int), 16, 0);
-	else if (str == 'X')
-		count += ft_puthexa_base(va_arg(list_argument, unsigned int), 16, 1);
-	else if (str == 'u')
-		count += ft_putnbr_base(va_arg(list_argument, unsigned int), 10);
->>>>>>> bd2747d10ee513f69bc9a8d96520769c53b94c18
 	else if (str == 'p')
 		count += ft_putaddress(va_arg(list_argument, unsigned long long));
 	else if (str == '%')
