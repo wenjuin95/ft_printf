@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putaddress.c                                    :+:      :+:    :+:   */
+/*   ft_puthexa_lower.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 13:49:22 by welow             #+#    #+#             */
-/*   Updated: 2023/10/27 14:22:09 by welow            ###   ########.fr       */
+/*   Created: 2023/10/27 12:08:20 by welow             #+#    #+#             */
+/*   Updated: 2023/10/27 14:15:11 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	ft_puthexa(unsigned long long nb)
+int	ft_puthexa_lower(unsigned int nb)
 {
 	int	count;
 
 	count = 0;
 	if (nb >= 16)
 	{
-		count += ft_puthexa(nb / 16);
-		count += ft_puthexa(nb % 16);
+		count += ft_puthexa_lower(nb / 16);
+		count += ft_puthexa_lower(nb % 16);
 	}
 	else
 	{
@@ -29,15 +29,5 @@ static int	ft_puthexa(unsigned long long nb)
 		else
 			count += ft_putchar(nb + 87);
 	}
-	return (count);
-}
-
-int	ft_putaddress(unsigned long long ptr)
-{
-	int	count;
-
-	count = 0;
-	count += ft_putstr("0x");
-	count += ft_puthexa(ptr);
 	return (count);
 }

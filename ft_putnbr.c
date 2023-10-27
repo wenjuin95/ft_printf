@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 21:14:16 by welow             #+#    #+#             */
-/*   Updated: 2023/10/26 16:57:05 by welow            ###   ########.fr       */
+/*   Created: 2023/10/27 11:40:16 by welow             #+#    #+#             */
+/*   Updated: 2023/10/27 12:01:26 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_base(long n, int base)
+int	ft_putnbr(int nb)
 {
 	int		count;
-	char	*symbol;
 
-	symbol = "0123456789abcdef";
-	if (n < 0)
+	count = 0;
+	if (nb == -2147483648)
 	{
-		ft_putchar('-');
-		return (ft_putnbr_base(-n, base) + 1);
+		count += ft_putchar('-');
+		return (count += ft_putstr("2147483648"));
 	}
-	else if (n < base)
-		return (ft_putchar(symbol[n]));
-	else
+	if (nb < 0)
 	{
-		count = ft_putnbr_base(n / base, base);
-		return (count + ft_putnbr_base(n % base, base));
+		count += ft_putchar('-');
+		nb = -nb;
 	}
+	if (nb >= 10)
+	{
+		count += ft_putnbr(nb / 10);
+		nb %= 10;
+	}
+	count += ft_putchar(nb + '0');
+	return (count);
 }

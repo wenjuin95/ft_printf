@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:20:01 by welow             #+#    #+#             */
-/*   Updated: 2023/10/26 21:44:05 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/27 14:06:37 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@
 # include <stdlib.h>
 
 int	ft_putchar(char c);
-int	ft_putnbr_base(long n, int base);
 int	ft_putstr(char *str);
-int	ft_puthexa_base(long n, int base);
-int	ft_putaddress(unsigned long long n, int base);
-int	ft_printf(const char *str, ...);
+int	ft_putnbr(int n);
+int	ft_putnbr_unsigned(unsigned int nb);
+int	ft_puthexa_lower(unsigned int nb);
+int	ft_puthexa_upper(unsigned int nb);
+int	ft_putaddress(unsigned long long ptr);
+int	ft_printf(const char *format, ...);
 
 #endif
