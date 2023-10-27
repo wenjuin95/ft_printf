@@ -3,29 +3,39 @@ SRC = ft_putchar.c ft_putstr.c ft_putnbr.c ft_putnbr_unsigned.c ft_puthexa_lower
 
 OBJS = ${SRC:.c=.o}
 
+INC = .
+
+LIBFT_PATH = ./libft
+
+LIBFT = ${LIBFT_PATH}/libft.a
+
 NAME = libftprintf.a
 
 CC = gcc
 
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -g -03
 
 AR = ar rcs
 
 RM = rm -f
 
 %.o : %.c
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAGS} -c $< -I${INC}
 
-${NAME}: ${OBJS}
+${NAME}: ${OBJS} ${LIBFT}
 	${AR} ${NAME} ${OBJS}
+
+${LIBFT}:
+	cd ${LIBFT_PATH} && make
+	cp ${LIBFT} ${NAME}
 
 all: ${NAME}
 
 clean:
-	${RM} ${OBJS}
+	${RM} ${OBJS} ${NAME}
 
 fclean: clean
-	${RM} ${NAME}
+	cd ${LIBFT_PATH} && make fclean
 
 re: fclean all
 
