@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:03:14 by welow             #+#    #+#             */
-/*   Updated: 2023/10/29 00:28:29 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/29 02:25:01 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,52 +20,50 @@ void	define_flags(t_flag *flags)
 int	check_is_fs(char c)
 {
 	char	*format;
-	int		i;
 
 	format = "cspdiuxX%";
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] == c)
-			return (1);
-		i++;
-	}
+	if (ft_strchr(format, c))
+		return (1);
 	return (0);
 }
 
-int	input(char *format, int *i)
+int	make_slot(const char *format, int i)
 {
-	int	count;
+	int		count;
 
-	count = ft_itoa(format + *i);
-	while (ft_isdigit(format[*i]))
-		(*i)++;
+	count = 0;
+	while (ft_isdigit(format[i]))
+	{
+		count += ft_atoi(format[i]);
+		i++;
+	}
+	return (count);
 }
 
-void	check_flags(char *str, int *i, t_flag *flags)
+int	check_flags(char *format, int i, t_flag *flags)
 {
-	while ((!(check_is_fs(str[*i]))) && str[*i])
+	while (check_is_fs(format[i]))
 	{
-		if (ft_isdigit(str[*i]) && str[*i] != '0')
+		if (ft_isdigit(format[i]))
 		{
-			flags->width = input(str, i);
+			flags->width = make_slot(format, i);
 			continue ;
 		}
-		if (str[*i] == '0')
-			flags->zero = 1;
-		else if (str[*i] == '-')
+		else if (format[i] == '-')
 			flags->minus = 1;
-		else if (str[*i] == '.' && ((*i) + 1))
+		else if (format[i] == '0')
+			flags->zero = 1;
+		else if (format[i] == '+')
+			flags->plus = 1;
+		else if (format[i] == '.' && i + 1)
 		{
 			flags->dot = 1;
-			flags->precision = input(str, i);
+			flags->precision = make_slot(format, i);
 		}
-		else if (str[*i] == '#')
+		else if (format[i] == '#')
 			flags->hash = 1;
-		else if (str[*i] == ' ')
+		else if (format[i] == ' ')
 			flags->space = 1;
-		else if (str[*i] == '+')
-			flags->plus = 1;
-		(*i)++;
+		i++;
 	}
 }

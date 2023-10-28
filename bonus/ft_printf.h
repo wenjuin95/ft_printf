@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:37:21 by welow             #+#    #+#             */
-/*   Updated: 2023/10/27 21:00:12 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/29 02:20:30 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 
 typedef struct s_flag
 {
-	int		number;
 	int		minus;
 	int		zero;
 	int		plus;
@@ -28,16 +27,15 @@ typedef struct s_flag
 	int		space;
 	int		width;
 	int		precision;
-	char	c;
 }	t_flag;
 
 /*flag*/
 void	define_flags(t_flag *flags);
 int		check_is_fs(char c);
-int		input(char *format, int *i);
-void	check_flags(char *str, int *i, t_flag *flags);
+int		make_slot(const char *format, int i);
+int		check_flags(char *str, int i, t_flag *flags);
 
 /* ft_printf */
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
 
 #endif
