@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:37:21 by welow             #+#    #+#             */
-/*   Updated: 2023/10/29 02:20:30 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/30 00:20:06 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,10 @@ int		check_flags(char *str, int i, t_flag *flags);
 
 /* ft_printf */
 int		ft_printf(const char *format, ...);
+int		printf_format(va_list list_argument, const char format, t_flag *flags);
+
+/*print %c*/
+int		ft_putchar(char c);
+int		ft_putchar_flag(char c, t_flag *flags);
 
 #endif
