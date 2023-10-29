@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wenjuin <wenjuin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:03:14 by welow             #+#    #+#             */
-/*   Updated: 2023/10/29 02:25:01 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/29 17:12:52 by wenjuin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_flags(char *format, int i, t_flag *flags)
 			flags->width = make_slot(format, i);
 			continue ;
 		}
-		else if (format[i] == '-')
+		if (format[i] == '-')
 			flags->minus = 1;
 		else if (format[i] == '0')
 			flags->zero = 1;

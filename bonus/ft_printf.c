@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wenjuin <wenjuin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:41:11 by welow             #+#    #+#             */
-/*   Updated: 2023/10/29 00:59:59 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/29 16:03:04 by wenjuin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,18 @@
 
 int	ft_printf(const char *format, ...)
 {
-    va_list		args;
-    t_flag		flags;
-    int			i;
-    int			len;
+    va_list	list_arg;
+    int		i;
+    int		char_print;
+	t_flag	*flags;
 
-    i = 0;
-    len = 0;
-    va_start(args, format);
-    while (format[i])
-    {
-        if (format[i] == '%')
-        {
-            i++;
-            define_flags(&flags);
-            check_flags((char *)format, &i, &flags);
-            len += check_fs((char *)format, &i, &flags, args);
-        }
-        else
-        {
-            ft_putchar(format[i]);
-            len++;
-        }
-        i++;
-    }
-    va_end(args);
-    return (len);
+	i = 0;
+	char_print = 0;
+	va_start(list_arg, format);
+	while (format[i])
+	{
+		define_flags(flags);
+		if (format[i] == '%')
+		
+	}
 }
