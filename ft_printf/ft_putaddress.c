@@ -27,7 +27,7 @@ static int	ft_puthexa(unsigned long long nb)
 		if (nb < 10)
 			count += ft_putchar(nb + '0');
 		else
-			count += ft_putchar(nb + 87);
+			count += ft_putchar(nb - 10 + 'a');
 	}
 	return (count);
 }
