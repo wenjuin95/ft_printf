@@ -15,7 +15,7 @@
 int	printf_format(va_list list_argument, const char str)
 {
 	int		count;
-	void	*ptr;
+	
 
 	count = 0;
 	if (str == 'c')
