@@ -14,7 +14,7 @@ AR = ar rcs
 RM = rm -f
 
 %.o : %.c
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+	${CC} ${CFLAG} -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJS} 
 	${AR} ${NAME} ${OBJS}
