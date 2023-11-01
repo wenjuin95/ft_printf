@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:43:58 by welow             #+#    #+#             */
-/*   Updated: 2023/10/27 14:27:22 by welow            ###   ########.fr       */
+/*   Updated: 2023/11/01 21:56:42 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_puthexa_upper(unsigned int nb)
 		if (nb < 10)
 			count += ft_putchar(nb + '0');
 		else
-			count += ft_putchar(nb  - 10 + 'A');
+			count += ft_putchar(nb - 10 + 'A');
 	}
 	return (count);
 }

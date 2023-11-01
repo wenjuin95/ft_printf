@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:15:50 by welow             #+#    #+#             */
-/*   Updated: 2023/10/27 14:27:13 by welow            ###   ########.fr       */
+/*   Updated: 2023/10/31 15:40:18 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	printf_format(va_list list_argument, const char str)
 {
 	int		count;
-	
 
 	count = 0;
 	if (str == 'c')

@@ -7,7 +7,7 @@ NAME = libftprintf.a
 
 CC = gcc
 
-CFLAG = -Wall -Wextra -Werror 
+CFLAG = -Wall -Wextra -Werror
 
 AR = ar rcs
 
@@ -16,13 +16,13 @@ RM = rm -f
 %.o : %.c
 	${CC} ${CFLAG} -c $< -o ${<:.c=.o}
 
-${NAME}: ${OBJS} 
+${NAME}: ${OBJS}
 	${AR} ${NAME} ${OBJS}
 
 all: ${NAME}
 
 clean:
-	${RM} ${OBJS} ${NAME}
+	${RM} ${OBJS}
 
 fclean: clean
 	${RM} ${NAME}
