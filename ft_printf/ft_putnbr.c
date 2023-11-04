@@ -14,24 +14,21 @@
 
 int	ft_putnbr(int nb)
 {
-	int		count;
-
+	int	count;
+	long	n;
+	
 	count = 0;
-	if (nb == -2147483648)
+	n = nb;
+	if (n < 0)
 	{
 		count += ft_putchar('-');
-		return (count += ft_putstr("2147483648"));
+		n *= -1;
 	}
-	if (nb < 0)
+	if (n >= 10)
 	{
-		count += ft_putchar('-');
-		nb = -nb;
+		count += ft_putnbr(n / 10);
+		n %= 10;
 	}
-	if (nb >= 10)
-	{
-		count += ft_putnbr(nb / 10);
-		nb %= 10;
-	}
-	count += ft_putchar(nb + '0');
+	count += ft_putchar(n + '0');
 	return (count);
 }

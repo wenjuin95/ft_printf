@@ -22,12 +22,7 @@ int	ft_puthexa_lower(unsigned long long nb)
 		count += ft_puthexa_lower(nb / 16);
 		count += ft_puthexa_lower(nb % 16);
 	}
-	else
-	{
-		if (nb < 10)
-			count += ft_putchar(nb + '0');
-		else
-			count += ft_putchar(nb - 10 + 'a');
-	}
+	else if (nb <= 16)
+		count += write(1, "0123456789abcdef" + nb, 1);
 	return (count);
 }

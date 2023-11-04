@@ -22,12 +22,9 @@ static int	ft_puthexa_ull(unsigned long long nb)
 		count += ft_puthexa_ull(nb / 16);
 		count += ft_puthexa_ull(nb % 16);
 	}
-	else
+	else if (nb <= 16)
 	{
-		if (nb < 10)
-			count += ft_putchar(nb + '0');
-		else
-			count += ft_putchar(nb - 10 + 'a');
+		count += write(1, "0123456789abcdef" + nb, 1);
 	}
 	return (count);
 }
@@ -37,7 +34,7 @@ int	ft_putaddress(unsigned long long ptr)
 	int	count;
 
 	count = 0;
-	count += ft_putstr("0x");
+	count += write(1, "0x", 2);
 	count += ft_puthexa_ull(ptr);
 	return (count);
 }
