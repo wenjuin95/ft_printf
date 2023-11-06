@@ -6,22 +6,21 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 20:41:11 by welow             #+#    #+#             */
-/*   Updated: 2023/10/30 00:19:11 by welow            ###   ########.fr       */
+/*   Updated: 2023/11/06 19:32:34 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	printf_format(va_list list_argument, const char format, t_flag *flags)
+int	print_format(va_list list_arg, const char format, t_flag *flags)
 {
 	int		count;
-	void	*ptr;
 
 	count = 0;
 	if (format == 'c')
-		count += ft_putchar_flag(va_arg(list_argument, int), flags);
-	// else if (format == 's')
-	// 	count += ft_putstr(va_arg(list_argument, char *));
+		count += ft_putchar_flag(va_arg(list_arg, int), flags);
+	else if (format == 's')
+		count += ft_putstr_flag(va_arg(list_arg, char *), flags);
 	// else if (format == 'd' || format == 'i')
 	// 	count += ft_putnbr(va_arg(list_argument, int));
 	// else if (format == 'u')
@@ -41,27 +40,24 @@ int	ft_printf(const char *format, ...)
 {
 	va_list		list_arg;
 	int			i;
-	int			char_print;
-	t_flag		*flags;
+	int			count;
+	t_flag		flags;
 
 	i = 0;
-	char_print = 0;
-	flags = malloc(sizeof(t_flag));
-	if (!flags)
-		return (0);
+	count = 0;
 	va_start(list_arg, format);
-	while (format[++i])
+	while (format[i])
 	{
-		define_flags(flags);
+		define_flags(&flags);
 		if (format[i] == '%')
 		{
-			check_flags(format, i, flags);
-			char_print += print_format(list_arg, format[i + 1], flags);
+			i = check_flags(format, i, &flags);
+			count += print_format(list_arg, format[i], &flags);
 		}
 		else
-			char_print += ft_putchar(format[i]);
+			count += ft_putchar(format[i]);
+		i++;
 	}
 	va_end(list_arg);
-	free(flags);
-	return (char_print);
+	return (count);
 }

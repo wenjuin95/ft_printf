@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_flag.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wenjuin <wenjuin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:03:14 by welow             #+#    #+#             */
-/*   Updated: 2023/10/29 17:12:52 by wenjuin          ###   ########.fr       */
+/*   Updated: 2023/11/06 18:51:59 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,56 +14,56 @@
 
 void	define_flags(t_flag *flags)
 {
-	bzero(flags, sizeof(t_flag));
+	ft_bzero(flags, sizeof(t_flag));
 }
 
 int	check_is_fs(char c)
 {
-	char	*format;
-
-	format = "cspdiuxX%";
-	if (ft_strchr(format, c))
+	if (c == 'c' || c == 's' || c == 'd' || c == 'i'
+		|| c == 'p' || c == 'x' || c == 'X' || c == 'u'
+		|| c == '%')
 		return (1);
 	return (0);
 }
 
-int	make_slot(const char *format, int i)
+void	handle_digit(char c, t_flag *flags)
 {
+	if ('0' == c && !(flags->width) & !(flags->dot))
+		flags->zero = 1;
+	else if ('0' == c && flags->width && !(flags->dot))
+		flags->width = (flags->width *= 10);
+	else if ('0' == c && flags->dot)
+		flags->precision = (flags->precision *= 10);
+	else if (ft_isdigit((int)c))
+	{
+		if (!(flags->dot))
+			flags->width = (flags->width * 10) + (c - 48);
+		else if (flags->dot)
+			flags->precision = (flags->precision * 10) + (c - 48);
+	}
+}
+
+int	check_flags(const char *format, int i, t_flag *flags)
+{
+	char	is_flags;
 	int		count;
 
 	count = 0;
-	while (ft_isdigit(format[i]))
+	while (!(check_is_fs(format[++i])))
 	{
-		count += ft_atoi(format[i]);
-		i++;
-	}
-	return (count);
-}
-
-int	check_flags(char *format, int i, t_flag *flags)
-{
-	while (check_is_fs(format[i]))
-	{
-		if (ft_isdigit(format[i]))
-		{
-			flags->width = make_slot(format, i);
-			continue ;
-		}
-		if (format[i] == '-')
+		is_flags = format[i];
+		if (is_flags == '-')
 			flags->minus = 1;
-		else if (format[i] == '0')
-			flags->zero = 1;
-		else if (format[i] == '+')
+		else if (is_flags == '+')
 			flags->plus = 1;
-		else if (format[i] == '.' && i + 1)
-		{
+		else if (is_flags == '.')
 			flags->dot = 1;
-			flags->precision = make_slot(format, i);
-		}
-		else if (format[i] == '#')
+		else if (is_flags == '#')
 			flags->hash = 1;
-		else if (format[i] == ' ')
+		else if (is_flags == ' ')
 			flags->space = 1;
-		i++;
+		else if (ft_isdigit(is_flags))
+			handle_digit(is_flags, flags);
 	}
+	return (i);
 }
