@@ -6,7 +6,7 @@
 /*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 19:15:50 by welow             #+#    #+#             */
-/*   Updated: 2023/10/31 15:40:18 by welow            ###   ########.fr       */
+/*   Updated: 2023/11/08 15:36:29 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,22 @@ int	ft_printf(const char *format, ...)
 {
 	va_list		list_argument;
 	int			i;
-	int			char_print;
+	int			count;
 
 	i = 0;
-	char_print = 0;
+	count = 0;
 	va_start(list_argument, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
-			char_print += printf_format(list_argument, format[i + 1]);
+			count += printf_format(list_argument, format[i + 1]);
 			i++;
 		}
 		else
-			char_print += ft_putchar(format[i]);
+			count += ft_putchar(format[i]);
 		i++;
 	}
 	va_end(list_argument);
-	return (char_print);
+	return (count);
 }
