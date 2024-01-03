@@ -1,38 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_flag.c                                   :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 20:11:39 by welow             #+#    #+#             */
-/*   Updated: 2023/11/06 22:02:51 by welow            ###   ########.fr       */
+/*   Created: 2023/10/27 11:40:16 by welow             #+#    #+#             */
+/*   Updated: 2023/11/07 19:04:20 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_flag(int n, t_flag *flags)
+int	ft_putnbr(int n)
 {
-	char	*str;
 	int		count;
-	int		i;
-	char	*tmp;
-	
+	long	nb;
+
 	count = 0;
-	str = ft_itoa(n);
-	if (flags->plus && n > 0)
-		count += ft_putchar('+');
-	if (flags->zero && flags->width > ft_strlen(str))
+	nb = n;
+	if (nb < 0)
 	{
-		i = 0;
-		while(i < flags->width-ft_strlen(str))
-		{
-			count += ft_putchar('0');
-			i++;
-		}
+		count += ft_putchar('-');
+		nb *= -1;
 	}
+	if (nb >= 10)
+	{
+		count += ft_putnbr(nb / 10);
+		nb %= 10;
+	}
+	count += ft_putchar(nb + '0');
+	return (count);
 }
-
-
-

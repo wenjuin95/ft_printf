@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_unsigned.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/24 21:09:40 by welow             #+#    #+#             */
-/*   Updated: 2023/10/26 14:09:35 by welow            ###   ########.fr       */
+/*   Created: 2023/10/27 12:03:13 by welow             #+#    #+#             */
+/*   Updated: 2023/11/07 19:04:15 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
+int	ft_putnbr_unsigned(unsigned int nb)
 {
-	int	i;
+	int	count;
 
-	i = 0;
-	if (str == NULL)
+	count = 0;
+	if (nb >= 10)
 	{
-		write(1, "(null)", 6);
-		return (6);
+		count += ft_putnbr_unsigned(nb / 10);
+		nb %= 10;
 	}
-	else
-	{
-		while (str[i])
-		{
-			i++;
-		}
-		write(1, str, i);
-		return (i);
-	}
+	count += ft_putchar(nb + '0');
+	return (count);
 }

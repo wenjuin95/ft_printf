@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_long_utils.c                                    :+:      :+:    :+:   */
+/*   ft_puthexa_lower.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 21:25:06 by welow             #+#    #+#             */
-/*   Updated: 2023/11/06 21:27:01 by welow            ###   ########.fr       */
+/*   Created: 2023/10/27 12:08:20 by welow             #+#    #+#             */
+/*   Updated: 2023/11/07 20:39:32 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_nbr_len(long nbr)
+#include "ft_printf.h"
+
+int	ft_puthexa_lower(unsigned int nb)
 {
-	int	count;
+	int		count;
+	char	*base;
 
 	count = 0;
-	if (nbr < 0)
+	base = "0123456789abcdef";
+	if (nb >= 16)
 	{
-		nbr *= -1;
-		count++;
+		count += ft_puthexa_lower(nb / 16);
+		nb %= 16;
 	}
-	if (nbr == 0)
-		return (1);
-	while (nbr > 0)
-	{
-		nbr /= 10;
-		count++;
-	}
+	count += write(1, &base[nb], 1);
 	return (count);
 }
-

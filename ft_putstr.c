@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthexa_upper.c                                 :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42.fr>                +#+  +:+       +#+        */
+/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 13:43:58 by welow             #+#    #+#             */
-/*   Updated: 2023/11/08 15:35:18 by welow            ###   ########.fr       */
+/*   Created: 2023/10/24 21:09:40 by welow             #+#    #+#             */
+/*   Updated: 2023/11/07 19:04:25 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthexa_upper(unsigned int nb)
+int	ft_putstr(char *str)
 {
-	int		count;
-	char	*base;
+	int	i;
 
-	count = 0;
-	base = "0123456789ABCDEF";
-	if (nb >= 16)
+	i = 0;
+	if (str == NULL)
 	{
-		count += ft_puthexa_upper(nb / 16);
-		nb %= 16;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	count += write(1, &base[nb], 1);
-	return (count);
+	else
+	{
+		while (str[i])
+		{
+			i++;
+		}
+		write(1, str, i);
+		return (i);
+	}
 }
