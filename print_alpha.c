@@ -1,29 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthexa_lower.c                                 :+:      :+:    :+:   */
+/*  print_alpha.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: welow <welow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: welow < welow@student.42kl.edu.my>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 12:08:20 by welow             #+#    #+#             */
-/*   Updated: 2023/11/07 20:39:32 by welow            ###   ########.fr       */
+/*   Created: 2023/10/24 21:09:40 by welow             #+#    #+#             */
+/*   Updated: 2024/01/04 17:16:22 by welow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_puthexa_lower(unsigned int nb)
+char	ft_putchar(char c)
 {
-	int		count;
-	char	*base;
+	write(1, &c, 1);
+	return (1);
+}
 
-	count = 0;
-	base = "0123456789abcdef";
-	if (nb >= 16)
+int	ft_putstr(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str == NULL)
 	{
-		count += ft_puthexa_lower(nb / 16);
-		nb %= 16;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	count += write(1, &base[nb], 1);
-	return (count);
+	else
+	{
+		while (str[i])
+		{
+			i++;
+		}
+		write(1, str, i);
+		return (i);
+	}
 }

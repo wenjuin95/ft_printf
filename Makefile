@@ -1,5 +1,4 @@
-SRC = ft_putchar.c ft_putstr.c ft_putnbr.c ft_putnbr_unsigned.c ft_puthexa_lower.c \
-	ft_puthexa_upper.c ft_putaddress.c ft_printf.c
+SRC = print_alpha.c print_number.c ft_putaddress.c ft_printf.c
 
 OBJS = ${SRC:.c=.o}
 
