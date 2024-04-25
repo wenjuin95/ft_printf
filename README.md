@@ -1,5 +1,5 @@
 <h1>ft_printf</h1>
-<p>In this project we need to recode printf</p>
+<p>In this project we need to implement our own printf</p>
 
 <h3>Before we start...</h3>
 <ol>
