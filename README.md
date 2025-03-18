@@ -1,16 +1,21 @@
-# ft_printf
-In this project we need to implement our own printf
-1. In our printf we need to handle the following conversions: c, s, p, d, i, u, x, X, %
-- %c : print char
-- %s : print string
-- %p : print pointer address
-- %d / %i : print integer (able to print positive and negative value)
-- %u : print integer (no negative value can be print)
-- %x : print hexadecimal (in lower capital letter)
-- %X : print hexadecimal (in upper capital letter)
-- %% : print % sign
+# 🖨️ printf
+### 1. in this project i try to replicate the simple printf for C programming
+### 2. my printf i able to handle the following conversions: c, s, p, d, i, u, x, X
+- c : print char
+- s : print string
+- p : print pointer address
+- d / i : print integer
+- u : print non-negative integer 
+- x : print hexadecimal (in lower capital letter)
+- X : print hexadecimal (in upper capital letter)
 
-
-## Before we start...
-1. learn about what is variadic function
-- https://www.youtube.com/watch?v=7Sph8JlRo0g
+## GUIDE TO USE MY PRINTF LIBRARY
+1. make the printf library
+2. in your c file you include the library
+```
+  #include "ft_printf.h"
+```
+3. when you execute you include the ft_printf.a
+```
+  gcc <your file name> ft_printf.a
+```
